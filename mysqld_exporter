@@ -1,0 +1,12 @@
+#!/bin/sh
+
+curl -L https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/mysqld_exporter-0.12.1.linux-amd64.tar.gz -o /tmp/mysqld_exporter.tar.gz
+cd /tmp && tar -zxvf mysqld_exporter.tar.gz
+
+sudo mv /tmp/mysqld_exporter-0.12.1.linux-amd64/mysqld_exporter /usr/local/bin/mysqld_exporter
+sudo useradd --no-create-home --shell /bin/false mysqld_exporter || true
+sudo curl -L https://get.vbash.pp.ua/mysqld_exporter.service -o /etc/systemd/system/mysqld_exporter.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable mysqld_exporter
+sudo systemctl start mysqld_exporter

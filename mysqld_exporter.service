@@ -1,0 +1,11 @@
+[Unit]
+Description=mysqld_exporter
+
+[Service]
+User=node_exporter
+Environment=DATA_SOURCE_NAME=exporter:jhgYS6JdnCxL2c@(localhost:3306)/
+
+ExecStart=/usr/local/bin/mysqld_exporter --web.listen-address=:9104 --no-collect.info_schema.tables
+
+[Install]
+WantedBy=multi-user.target
